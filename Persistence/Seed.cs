@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Domain;
 
 namespace Persistence
@@ -13,151 +14,64 @@ namespace Persistence
                     new SchoolYear
                     {
                         IsActiveYear = true,
-                        Name = "21-22",
+                        SchoolYearName = "21-22",
                         DisplayOnForm = true,
+                        FormLabel = "21-22 (Current School Year)"
                     },
                     new SchoolYear
                     {
                         IsActiveYear = false,
-                        Name = "22-23",
+                        SchoolYearName = "22-23",
                         DisplayOnForm = true,
+                        FormLabel = "22-23 (Upcoming School Year)"
                     },
                 };
 
-                List<Parent> parents = new List<Parent>
+                List<School> schools = new List<School>
                 {
-                    new Parent
+                    new School
                     {
-                        FirstName = "Tugba",
-                        LastName = "Polat",
-                        Email = "mpolat@test.com",
-                        PhoneNumber = "413555555",
-                        Relationship = "Father",
-                    },
-                    new Parent
-                    {
-                        FirstName = "Murat",
-                        LastName = "Polat",
-                        Email = "mpolat@test.com",
-                        PhoneNumber = "413555555",
-                        Relationship = "Father",
-                    },
-                    new Parent
-                    {
-                        FirstName = "Ahmet",
-                        LastName = "Polat",
-                        Email = "mpolat@test.com",
-                        PhoneNumber = "413555555",
-                        Relationship = "Father",
-                    },
-                };
+                        SchoolName = "HCSS East",
 
-                List<Student> students = new List<Student>
-                {
-                    new Student
-                    {
-                        FirstName = "Zeynep",
-                        LastName = "Polat",
-                        Gender = "Female",
-                        StreetAddress = "20 Johnson Road",
-                        City = "Chicopee",
-                        State = "MA",
-                        ZipCode = "01022",
-                        CurrentSchool = "HCSS",
-                        CurrentGrade = 5,
-                        HasSibling = false,
-                        DOB = DateTime.Parse("2010-11-14").ToUniversalTime(),
-                        Parents = new List<ApplicantParent>
-                        {
-                            new ApplicantParent
-                            {
-                                Parent = parents[0],
-                                IsPrimaryParent = true,
-                            },
-                            new ApplicantParent
-                            {
-                                Parent = parents[1]
-                            }
-                        }
                     },
-                    new Student
+                    new School
                     {
-                        FirstName = "Selim",
-                        LastName = "Polat",
-                        Gender = "Male",
-                        StreetAddress = "20 Johnson Road",
-                        City = "Chicopee",
-                        State = "MA",
-                        ZipCode = "01022",
-                        CurrentSchool = "HCSS",
-                        CurrentGrade = 5,
-                        HasSibling = false,
-                        DOB = DateTime.Parse("2010-11-14").ToUniversalTime(),
-                        Parents = new List<ApplicantParent>
-                        {
-                            new ApplicantParent
-                            {
-                                Parent = parents[0],
-                                IsPrimaryParent = true,
-                            },
-                            new ApplicantParent
-                            {
-                                Parent = parents[1]
-                            }
-                        }
-                    },
-                    new Student
-                    {
-                        FirstName = "Huseyin",
-                        LastName = "Polat",
-                        Gender = "Male",
-                        StreetAddress = "20 Johnson Road",
-                        City = "Chicopee",
-                        State = "MA",
-                        ZipCode = "01022",
-                        CurrentSchool = "HCSS",
-                        CurrentGrade = 5,
-                        HasSibling = false,
-                        DOB = DateTime.Parse("2010-11-14").ToUniversalTime(),
-                        Parents = new List<ApplicantParent>
-                        {
-                            new ApplicantParent
-                            {
-                                Parent = parents[2],
-                                IsPrimaryParent = true,
-                            },
-                        }
+                        SchoolName = "HCSS West",
+
                     }
+                };
+
+                Lottery lottery = new Lottery 
+                {
+                    SchoolYear = schoolYears[0],
+                    School = schools[0],
+                    Grade = 6
                 };
 
                 List<Application> applications = new List<Application>
                 {
-                    new Application {
-                        SchoolYear = schoolYears[0],
-                        School = "HCSS East",
-                        Grade = 6,
+                    new Application
+                    {
+                        FirstName = "Michael",
+                        LastName = "Jordan",
+                        Gender = "Male",
+                        StreetAddress = "20 Johnson Road",
+                        City = "Chicopee",
+                        State = "MA",
+                        Zipcode = "01022",
+                        CurrentSchool = "HCSS",
+                        CurrentGrade = "5",
+                        HasSibling = false,
+                        DOB = DateTime.Parse("2010-11-14").ToUniversalTime(),
+                        PrimaryParentName = "Matt Jordan",
+                        PrimaryParentEmail = "matt@test.com",
+                        PrimaryParentPhoneNumber = "41355226",
+                        PrimaryParentRelationship = "Father",
                         AgreeToTerms = true,
-                        Notes = "Seeded Data 1",
-                        HowDidYouHear = "Facebook",
-                        Student = students[0]
-                    },
-                    new Application {
-                        SchoolYear = schoolYears[0],
-                        School = "HCSS West",
-                        Grade = 7,
-                        AgreeToTerms = true,
-                        Notes = "Seeded Data 2",
-                        HowDidYouHear = "Twitter",
-                        Student = students[1]
-                    },
-                    new Application {
-                        SchoolYear = schoolYears[1],
-                        School = "Both Schools",
-                        Grade = 8,
-                        AgreeToTerms = true,
-                        Notes = "Seeded Data 3",
-                        HowDidYouHear = "Newspaper",
-                        Student = students[2]
+                        HowDidYouHear = "Website",
+                        Lottery = lottery,
+                        School = schools[0],
+                        SchoolYear = schoolYears[0]
                     }
                 };
 
