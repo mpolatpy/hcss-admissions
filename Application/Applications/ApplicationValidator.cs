@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Application.Applications
 {
-    public class ApplicationValidator : AbstractValidator<Domain.Application>
+    public class ApplicationValidator : AbstractValidator<ApplicationDto>
     {
         public ApplicationValidator()
         {

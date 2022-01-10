@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Application } from '../models/ApplicationFormModels';
+import { School } from '../models/School';
 import { SchoolYear } from '../models/SchoolYear';
 
 
@@ -25,6 +26,10 @@ const SchoolYears = {
     detail: (name: string) => requests.get<SchoolYear>(`/schoolYears/${name}`),
 }
 
+const Schools = {
+    list: () => requests.get<School[]>('/schools'),
+}
+
 const Applications = {
     list: () => requests.get<SchoolYear[]>('/applications'),
     detail: (id: string) => requests.get<SchoolYear>(`/applications/${id}`),
@@ -33,6 +38,7 @@ const Applications = {
 
 const agent = {
     SchoolYears,
+    Schools,
     Applications
 }
 

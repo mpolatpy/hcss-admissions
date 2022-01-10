@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 // import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import SteppedForm from '../components/application-form/SteppedForm';
+import { observer } from 'mobx-react-lite';
 
 const ApplicationForm = () => {
 
@@ -19,4 +20,4 @@ const ApplicationForm = () => {
     )
 };
 
-export default ApplicationForm;
+export default observer(ApplicationForm);

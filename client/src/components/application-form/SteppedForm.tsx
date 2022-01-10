@@ -10,23 +10,28 @@ import StepContents from './steps/StepContents';
 import { Form, Formik } from 'formik';
 import { validationSchema } from './validation/ValidationSchema';
 import agent from '../../api/agent';
+import { useStore } from '../../stores/store';
+import { observer } from 'mobx-react-lite';
 
 const steps = ['Application Details', 'Student', 'Parent(s)', 'Other Details', 'Review and Submit'];
 
-export default function SteppedForm() {
+const SteppedForm = () => {
   const [activeStep, setActiveStep] = useState(0);
   const currentValidationSchema = validationSchema[activeStep];
   const isLastStep = activeStep === steps.length - 1;
-  const schoolYear = '21-22';
 
-  function _sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  const {commonStore} = useStore();
+  const {activeSchoolYear: schoolYear} = commonStore;
 
   async function _submitForm(values: Application, actions: any) {
-    
+
+    console.log('form values',values);
     try{
-      await agent.Applications.create(values)
+      const response = await agent.Applications.create({
+        ...values,
+        hasSibling: values.hasSibling === 'true' ? true : 
+                    (values.hasSibling === 'false' ? false : values.hasSibling)
+      });
       actions.setSubmitting(false);
       setActiveStep(activeStep + 1);
     } catch (e) {
@@ -68,17 +73,17 @@ export default function SteppedForm() {
       {activeStep === steps.length ? (
         <>
           <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
+            Thank you for appying to HCSS.
+
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Edit</Button>
-            <Button>Submit</Button>
+            <Button onClick={handleReset}>Submit Another Form</Button>
           </Box>
         </>
       ) : (
         <Formik
-          initialValues={new Application(schoolYear)}
+          initialValues={new Application(schoolYear!)}
           onSubmit={_handleSubmit}
           validationSchema={currentValidationSchema}
         >
@@ -104,11 +109,11 @@ export default function SteppedForm() {
                   )
                 }
                 <Button
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !dirty || !isValid}
                   variant="contained"
                   type="submit"
                 >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
                 </Button>
               </Box>
               <button type="button" onClick={() => console.log(values, isValid, dirty)}>values</button>
@@ -120,4 +125,6 @@ export default function SteppedForm() {
       <button onClick={() => console.log(activeStep)}>Active Step</button>
     </Box>
   );
-}
+};
+
+export default observer(SteppedForm);

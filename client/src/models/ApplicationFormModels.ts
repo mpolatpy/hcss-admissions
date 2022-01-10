@@ -1,7 +1,7 @@
 
 export interface ApplicationFormValues {
-    schoolYear: string;
-    school: string;
+    schoolYearId: number;
+    schoolId: number | undefined;
     grade: string;
     agreeToTerms: boolean;
     howDidYouHear: string | null;
@@ -16,22 +16,22 @@ export interface ApplicationFormValues {
     gender: string;
     currentSchool: string;
     currentGrade: string;
-    hasSibling: boolean;
+    hasSibling: string | boolean;
     siblingName?: string;
     siblingSchool?: string;
     primaryParentName: string;
     primaryParentEmail: string;
-    primaryParentPhone: string;
+    primaryParentPhoneNumber: string;
     primaryParentRelationship: string;
     secondaryParentName?: string;
     secondaryParentEmail?: string;
-    secondaryParentPhone?: string;
+    secondaryParentPhoneNumber?: string;
     secondaryParentRelationship?: string;
 }
 
 export class Application implements ApplicationFormValues {
-    schoolYear: string;
-    school: string = '';
+    schoolYearId: number = -1;
+    schoolId: number | undefined = -1;
     grade: string = '';
     agreeToTerms: boolean = false;
     howDidYouHear: string | null = null;
@@ -46,20 +46,20 @@ export class Application implements ApplicationFormValues {
     gender: string = '';
     currentSchool: string = '';
     currentGrade: string = '';
-    hasSibling: boolean = false;
+    hasSibling: string | boolean = false;
     siblingName?: string = '';
     siblingSchool?: string = '';
     primaryParentName: string = '';
     primaryParentEmail: string = '';
-    primaryParentPhone: string = '';
+    primaryParentPhoneNumber: string = '';
     primaryParentRelationship: string = '';
     secondaryParentName?: string = '';
     secondaryParentEmail?: string = '';
-    secondaryParentPhone?: string = '';
+    secondaryParentPhoneNumber?: string = '';
     secondaryParentRelationship?: string = '';
 
-    constructor(schoolYear: string){
-        this.schoolYear = schoolYear;
+    constructor(schoolYearId: number){
+        this.schoolYearId = schoolYearId;
     }
 
 }

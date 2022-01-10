@@ -1,16 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 import {Link} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid'
 import { Button, Card, CardMedia, Divider, Typography } from '@mui/material';
 
 const HomePage = () => {
-    let url = 'http://localhost:5000/api/student/list';
-
-    const test = () => {
-        axios.get(url).then(response => console.log(response));
-    }
 
     return (
         <Grid container mt={2} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

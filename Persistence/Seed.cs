@@ -1,13 +1,13 @@
-using System.Collections.Generic;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            if (!context.Applications.Any())
+            if (!context.SchoolYears.Any())
             {
                 List<SchoolYear> schoolYears = new List<SchoolYear>
                 {
@@ -26,7 +26,35 @@ namespace Persistence
                         FormLabel = "22-23 (Upcoming School Year)"
                     },
                 };
+                await context.SchoolYears.AddRangeAsync(schoolYears);
+            }
 
+            if(!userManager.Users.Any())
+            {
+                var user = new AppUser
+                {
+                    UserName="mpolat@hampdencharter.org", 
+                    Email="mpolat@hampdencharter.org",
+                };
+
+                await userManager.CreateAsync(user, "Pa$$w0rd");
+
+                var role = new IdentityRole("superadmin");
+                var result = await roleManager.CreateAsync(role);
+
+                if(result.Succeeded)
+                {
+                    Console.WriteLine("Adding Role superadmin");
+                    await userManager.AddToRoleAsync(user, "superadmin");
+                }
+                else{
+                    Console.WriteLine("Failed Adding Role superadmin");
+                }
+                
+            }
+
+            if (!context.Schools.Any())
+            {
                 List<School> schools = new List<School>
                 {
                     new School
@@ -41,44 +69,10 @@ namespace Persistence
                     }
                 };
 
-                Lottery lottery = new Lottery 
-                {
-                    SchoolYear = schoolYears[0],
-                    School = schools[0],
-                    Grade = 6
-                };
-
-                List<Application> applications = new List<Application>
-                {
-                    new Application
-                    {
-                        FirstName = "Michael",
-                        LastName = "Jordan",
-                        Gender = "Male",
-                        StreetAddress = "20 Johnson Road",
-                        City = "Chicopee",
-                        State = "MA",
-                        Zipcode = "01022",
-                        CurrentSchool = "HCSS",
-                        CurrentGrade = "5",
-                        HasSibling = false,
-                        DOB = DateTime.Parse("2010-11-14").ToUniversalTime(),
-                        PrimaryParentName = "Matt Jordan",
-                        PrimaryParentEmail = "matt@test.com",
-                        PrimaryParentPhoneNumber = "41355226",
-                        PrimaryParentRelationship = "Father",
-                        AgreeToTerms = true,
-                        HowDidYouHear = "Website",
-                        Lottery = lottery,
-                        School = schools[0],
-                        SchoolYear = schoolYears[0]
-                    }
-                };
-
-                await context.Applications.AddRangeAsync(applications);
-                await context.SaveChangesAsync();
+                await context.Schools.AddRangeAsync(schools);
             }
 
+            await context.SaveChangesAsync();
         }
     }
 }

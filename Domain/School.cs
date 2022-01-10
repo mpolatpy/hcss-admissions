@@ -9,6 +9,6 @@ namespace Domain
         [JsonIgnore]
         public ICollection<Application> Applications { get; set; }
         [JsonIgnore]
-        public ICollection<Lottery> Lotteries { get; set; }
+        public ICollection<WaitList> WaitLists { get; set; }
     }
 }

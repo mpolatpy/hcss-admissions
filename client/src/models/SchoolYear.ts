@@ -1,6 +1,6 @@
 
 export interface SchoolYear {
-    isActiveyear: boolean;
+    isActiveYear: boolean;
     schoolYearName: string;
     id: number;
     formLabel: string;

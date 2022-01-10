@@ -20,22 +20,22 @@ const ParentDetails = () => (
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomTextField
-            label="Primary Parent Relation to Student" 
+            label="Relationship to Student" 
             name="primaryParentRelationship" 
             variant="outlined"
         />
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomTextField
-            label="Primary Parent Email" 
+            label="Parent Email" 
             name="primaryParentEmail" 
             variant="outlined"
         />
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomTextField
-            label="Primary Parent Phone" 
-            name="primaryParentPhone" 
+            label="Parent Phone Number" 
+            name="primaryParentPhoneNumber" 
             variant="outlined"
         />
       </Grid>
@@ -44,29 +44,29 @@ const ParentDetails = () => (
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomTextField
-            label="Secondary Parent Name" 
+            label="Parent Name" 
             name="secondaryParentName" 
             variant="outlined"
         />
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomTextField
-            label="Secondary Parent Relation to Student" 
+            label="Relationship to Student" 
             name="secondaryParentRelationship" 
             variant="outlined"
         />
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomTextField
-            label="Secondary Parent Email" 
+            label="Parent Email" 
             name="secondaryParentEmail" 
             variant="outlined"
         />
       </Grid>
       <Grid item xs={12} md={6}>
         <CustomTextField
-            label="Secondary Parent Phone" 
-            name="secondaryParentPhone" 
+            label="Parent Phone Number" 
+            name="secondaryParentPhoneNumber" 
             variant="outlined"
         />
       </Grid>

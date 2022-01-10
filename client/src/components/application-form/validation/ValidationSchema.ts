@@ -4,8 +4,8 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 
 export const validationSchema = [
     Yup.object({
-        school: Yup.string().required('Please select the school'),
-        schoolYear: Yup.string().required('Select which school year you want to apply'),
+        schoolId: Yup.string().required('Please select the school'),
+        schoolYearId: Yup.string().required('Select which school year you want to apply'),
         grade: Yup.string().required('Please select a grade level'),
     }),
     Yup.object({
@@ -25,11 +25,11 @@ export const validationSchema = [
     Yup.object({
         primaryParentName: Yup.string().required('This is a required field'),
         primaryParentEmail: Yup.string().required('This is a required field').email('Enter a valid email'),
-        primaryParentPhone: Yup.string().required('This is a required field').matches(phoneRegExp, 'Phone number is not valid'),
+        primaryParentPhoneNumber: Yup.string().required('This is a required field').matches(phoneRegExp, 'Phone number is not valid'),
         primaryParentRelationship: Yup.string().required('This is a required field'),
         secondaryParentName: Yup.string(),
         secondaryParentEmail: Yup.string().email('Enter a valid email'),
-        secondaryParentPhone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+        secondaryParentPhoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
         secondaryParentRelationship: Yup.string(),
     })
 ]

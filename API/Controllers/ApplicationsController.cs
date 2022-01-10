@@ -18,7 +18,7 @@ namespace API.Controllers
         }
 
         [HttpPost("new")]
-        public async Task<IActionResult> CreateApplication(Domain.Application application)
+        public async Task<IActionResult> CreateApplication(ApplicationDto application)
         {
             return HandleResult(await Mediator.Send(new Create.Command{Application = application}));
         }
